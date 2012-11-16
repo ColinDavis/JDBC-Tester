@@ -4,10 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mysql.jdbc.Driver;
+//import com.mysql.jdbc.Driver;
 
-public class Tester1 {
-	public static void main(String[] args) {
+public class Tester1 
+{
+	public static void main(String[] args) 
+	{
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -20,17 +22,22 @@ public class Tester1 {
 			String connectionPassword = "mhsatics";
 			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM employees");
+			rs = stmt.executeQuery("SELECT * FROM Updates");
 			while (rs.next()) {
-				String id = rs.getString("id");
-				String firstName = rs.getString("first_name");
-				String lastName = rs.getString("last_name");
-				System.out.println("ID: " + id + ", First Name: " + firstName
-						+ ", Last Name: " + lastName);
+				String updateID = rs.getString("Update_ID");
+				String updateText = rs.getString("Update_Text");
+				String updateUID = rs.getString("Update_UID");
+				String updateDate = rs.getString("Update_Date");
+				System.out.println("Update ID: " + updateID + ", updateUID: " + updateUID
+						+ ", Update Text: " + updateText + ", Update Date: " + updateDate);
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			e.printStackTrace();
-		} finally {
+		} 
+		finally 
+		{
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
