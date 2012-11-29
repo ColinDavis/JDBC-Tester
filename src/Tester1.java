@@ -16,20 +16,29 @@ public class Tester1
 		try {
 			new com.mysql.jdbc.Driver();
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
- conn = DriverManager.getConnection("jdbc:mysql://web.8bitben.com:3306/mhscsorg_wp?user=java_testr&password=mhsatics");
-			String connectionUrl = "jdbc:mysql://web.8bitben.com:3306/mhscsorg_wp";
-			String connectionUser = "java_test";
-			String connectionPassword = "mhsatics";
+			conn = DriverManager.getConnection("jdbc:mysql://sqlserver.mhscs.org:3600/MHS_Android_News?user=java_client&password=rRcNmJsHFfD7XEjn");
+			String connectionUrl = "jdbc:mysql://sqlserver.mhscs.org:3600";
+			String connectionUser = "java_client";
+			String connectionPassword = "rRcNmJsHFfD7XEjn";
 			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM Updates");
-			while (rs.next()) {
-				String updateID = rs.getString("Update_ID");
+			while (rs.next())
+			{
+				
+				int updateID = rs.getInt("Update_ID");
 				String updateText = rs.getString("Update_Text");
-				String updateUID = rs.getString("Update_UID");
-				String updateDate = rs.getString("Update_Date");
-				System.out.println("Update ID: " + updateID + ", updateUID: " + updateUID
-						+ ", Update Text: " + updateText + ", Update Date: " + updateDate);
+				String updateUID = rs.getString("Update_UID");		//Access userName at a later date
+				String updateDate = rs.getString("Update_Date");	
+				
+			//	 * Use ArrayList<Post> to store Posts; parameters: (updateID, updateText, updateUID, updateDate, TextBox)
+			//	 * Use ArrayList<TextBox> to store TextBoxes with corresponding Posts 
+				 
+				System.out.println(updateID);
+				System.out.println(updateText);
+				System.out.println(updateUID);
+				System.out.println(updateDate);
+				
 			}
 		} 
 		catch (Exception e) 
