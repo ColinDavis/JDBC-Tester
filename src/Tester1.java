@@ -16,8 +16,8 @@ public class Tester1
 		try {
 			new com.mysql.jdbc.Driver();
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = DriverManager.getConnection("jdbc:mysql://sqlserver.mhscs.org:3600/MHS_Android_News?user=java_client&password=rRcNmJsHFfD7XEjn");
-			String connectionUrl = "jdbc:mysql://sqlserver.mhscs.org:3600";
+			conn = DriverManager.getConnection("jdbc:mysql://sqlserver.mhscs.org:3306/MHS_Android_News?user=java_client&password=rRcNmJsHFfD7XEjn");
+			String connectionUrl = "jdbc:mysql://sqlserver.mhscs.org:3306";
 			String connectionUser = "java_client";
 			String connectionPassword = "rRcNmJsHFfD7XEjn";
 			conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
