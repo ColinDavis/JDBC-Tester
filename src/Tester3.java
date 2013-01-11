@@ -8,15 +8,17 @@ import java.util.logging.Logger;
 
 public class Tester3 {
     
+	
+	
     public static void main(String[] args) {
 
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-        String url = "jdbc:mysql://sqlserver.mhscs.org:3306/MHS_Android_News";
-        String user = "java_client";
-        String password = "rRcNmJsHFfD7XEjn";
+        String url = "jdbc:mysql://MySQL55.marlborough.int:3306/MHS_News";
+        String user = "Android_Client";
+        String password = "bA55nAFA";
 
         try {
             
@@ -25,14 +27,20 @@ public class Tester3 {
             rs = pst.executeQuery();
 
             while (rs.next()) {
-                System.out.print(rs.getInt(1));
-                System.out.print(": ");
-                System.out.println(rs.getInt(2));
-                System.out.print(": ");
-                System.out.println(rs.getInt(3));
-                System.out.print(": ");
-                System.out.println(rs.getString(4));
+                System.out.println("ID: "+rs.getInt(2));		//i.e 1= first ever, 2 is second ever, etc. (1,3,4 happens)
+                System.out.println("User: "+rs.getInt(3));		//identifier for person
+                System.out.println("Text: "+rs.getString(4));
+                System.out.println("Date: "+rs.getString(1));
+                System.out.println();
             }
+            
+            pst = con.prepareStatement("SELECT * FROM Users");
+            rs = pst.executeQuery();
+            
+    /*        while(rs.next()) {
+            	System.out.println(rs.getString(2));
+            }
+*/
 
         } catch (SQLException ex) {
                 Logger lgr = Logger.getLogger(Tester3.class.getName());
@@ -57,4 +65,21 @@ public class Tester3 {
             }
         }
     }
+}
+
+class testPerson
+{
+	private int ID;
+	private String name;
+	
+	public testPerson(int ID, String name)
+	{
+		this.ID = ID;
+		this.name=name;
+	}
+	
+	public String getName()
+		{return name;}
+	public int getID()
+		{return ID;}
 }
