@@ -29,6 +29,7 @@ public class Tester3 {
             while (rs.next()) {
                 System.out.println("ID: "+rs.getInt(2));		//i.e 1= first ever, 2 is second ever, etc. (1,3,4 happens)
                 System.out.println("User: "+rs.getInt(3));		//identifier for person
+                String rawDate= rs.getString(3);
                 System.out.println("Text: "+rs.getString(4));
                 System.out.println("Date: "+rs.getString(1));
                 System.out.println();
