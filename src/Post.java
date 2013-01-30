@@ -1,56 +1,60 @@
+import com.google.gson.annotations.SerializedName;
+
 public class Post
 {/*
 	 *JDBC TESTER. not actual class~~~
 	 */
-	private int ID, UID, rank;
-	private String text, date, name="";
+	private int Update_ID,Update_UID,rank;
+	
+	private String Update_Text,Update_Date,name;
+	
 	
 	/**
 	 * This constructor is used solely for the data hard-coded for testing.
 	 */
 	public Post()
 	{
-		this.date = "date";
-		this.ID = -1;
-		this.UID = -1;
-		this.text = "text";
+		this.Update_Date = "date";
+		this.Update_ID = -1;
+		this.Update_UID = -1;
+		this.Update_Text = "Update_Text";
 		this.rank = -1;
 		this.name = "name";
 	}
-	public Post(int ID, String text, String name, String date,int ranking)
+	public Post(int Update_ID, String Update_Text, String name, String date,int ranking)
 	{
 		//userName = name;
-		this.ID= ID;
-		this.text = text;
+		this.Update_ID= Update_ID;
+		this.Update_Text = Update_Text;
 		this.name = name;
-		this.date = date;
+		this.Update_Date = date;
 		rank = ranking;
 		
 	}
 	/**
 	 * This method is the method to initialize data based on the time it can be attained from the database.
 	 */
-	public Post(String date, int ID, int UID, String text)
+	public Post(String Update_Date, int Update_ID, int Update_UID, String Update_Text)
 	{
-		this.date = date;
-		this.ID = ID;
-		this.UID=UID;
-		this.text=text;
+		this.Update_Date = Update_Date;
+		this.Update_ID = Update_ID;
+		this.Update_UID=Update_UID;
+		this.Update_Text=Update_Text;
 		
 		this.rank = -1;
 		this.name = "";
 	}
 	
 	public int getID()
-		{return ID;}
+		{return Update_ID;}
 	public String getText()
-		{return text;}
+		{return Update_Text;}
 	public int getUID()
-		{return UID;}
+		{return Update_UID;}
 	public String getName()
 		{return name;}
 	public String getDate()
-		{return date;}
+		{return Update_Date;}
 	public int getRank()
 		{return rank;}
 	

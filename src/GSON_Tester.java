@@ -14,35 +14,40 @@ public class GSON_Tester
 	
 	public static void main(String[] args) 
 	{
-	//	post =new Post();
+		post =new Post();
 		
-		 try {		System.out.println(call("http://dev.mhsnews.org/json_db.php"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		try {
+			 System.out.println(call("http://dev.mhsnews.org/json_db.php"));
+			 test();
+		} catch (IOException e) {e.printStackTrace();	}
 		 
-		/* System.out.print(post.getName());
+		 System.out.print(post.getName());
 		 System.out.println(": " + post.getUID());
 		 System.out.println(post.getRank());
 		 System.out.println(post.getText());
-		 System.out.println(post.getDate());*/
+		 System.out.println(post.getDate());
 		 
 		 
 		 
 		 
 	}
 	
-	public void test()
+	public static void test()
 	{
 		Gson gson = new Gson();
 		String json;
 		//try {
 			//json = call("http://dev.mhsnews.org/json_db.php");
-			json = "\"0\":\"2013-01-02 09:47:04\",\"Update_Date\":\"2013-01-02 09:47:04\",\"1\":\"31\",\"Update_ID\":\"31\",\"2\":\"2\",\"Update_UID\":\"2\",\"3\":\"Test\",\"Update_Text\":\"Test\"}";
+		json = "{\"0\":\"2013-01-02 09:47:04\",\"Update_Date\":\"2013-01-02 09:47:04\",\"1\":\"31\",\"Update_ID\":\"31\",\"2\":\"2\",\"Update_UID\":\"2\",\"3\":\"Test\",\"Update_Text\":\"Test\"}";
+		  System.out.println(json.toCharArray().length);
+		json += "{\"0\":\"2013-01-02 09:46:19\",\"Update_Date\":\"2013-01-02 09:46:19\",\"1\":\"30\",\"Update_ID\":\"30\",\"2\":\"0\",\"Update_UID\":\"0\",\"3\":\"jkl;sdasdafjklsadfjkl;\",\"Update_Text\":\"jkl;sdasdafjklsadfjkl;\"}";
 			
-			
+		  System.out.println(json.toCharArray().length);
+			//LOOP:
+				//While there is a line in JSON up to a certain line (test:4)
+			post = gson.fromJson(json, Post.class);
 		
-	//	} catch (IOException e) {e.printStackTrace();}
+		//} catch (IOException e) {e.printStackTrace();}
 		
 	}
 	public static String call(String url) throws IOException {  
