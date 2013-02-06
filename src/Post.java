@@ -1,4 +1,4 @@
-import com.google.gson.annotations.SerializedName;
+
 
 public class Post
 {/*
@@ -58,8 +58,10 @@ public class Post
 	public int getRank()
 		{return rank;}
 	
-	public void setName(String name)
-		{this.name = name;}
-	public void setRank(int rank)
-		{this.rank=rank;}
+
+	public void setTeacher(Teacher teacher)
+	{
+		this.rank = teacher.getRank();
+		this.name = teacher.getName();
+	}
 }
