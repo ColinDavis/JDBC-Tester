@@ -15,38 +15,72 @@ public class GSON_UID_Tester
 	 * which is the case for the information about the Teacher we have from the Post. teacherList is the list of Teachers
 	 * that we attain from JSON, which will be used to set names/ranks to Posts based off the UIDs of the posting Teachers.
 	 */
-	private static ArrayList<Teacher> teacherList1,teacherList;
+	private static ArrayList<Teacher> teacherList;
+	public static ArrayList<Post> postList;
 	
-	public static void main(String[] args) 
+	public static void main(String args[])
 	{
-		teacherList1 = new ArrayList<Teacher>();
-		for(int i=0; i<5; i++)
-			teacherList1.add(new Teacher(i+1));
-		
-		teacherList = new ArrayList<Teacher>();
-		
-		try {
-			 System.out.println(getJSON("http://dev.mhsnews.org/json_db/users.php"));
-			 getTeachers();
-		} catch (IOException e) {e.printStackTrace();	}
-		
-		//--------------------------------------------------------------------------------\\
-		
-		System.out.println("No Longer JUST json section");
-		//set the rest of the Teacher data when I only have the UID to work with, and the list of Teachers
-		for(int i=0; i<teacherList1.size(); i++)
-			for(int j=0; j<teacherList.size(); j++)
-				if ( teacherList1.get(i).getUID() == teacherList.get(j).getUID() )
-				{
-					teacherList1.get(i).set(teacherList.get(j));
-					System.out.println("UID: "+teacherList1.get(i).getUID());
-					System.out.println("Name: "+teacherList1.get(i).getName());
-					System.out.println("Rank: "+teacherList1.get(i).getRank());
-					System.out.println();
-				}
+		dataBaseData();
+		for(int i=0; i<postList.size(); i++)
+		{
+			System.out.print(postList.get(i).getName());
+			System.out.println(": " + postList.get(i).getUID());
+			System.out.println(postList.get(i).getID());
+			System.out.println(postList.get(i).getText());
+			System.out.println(postList.get(i).getDate());
+			System.out.println();
+		}
 	}
+    private static void dataBaseData()
+    {
+    	teacherList = new ArrayList<Teacher>();
+    	postList = new ArrayList<Post>();
+    	
+    	//Through testing, we know that the code GETS here successfully.
+    	Gson gson = new Gson();
+		String json;
+		try {
+			json = getJSON("http://dev.mhsnews.org/json_db/updates.php");
 	
-	public static void getTeachers()
+		char[] cson = json.toCharArray();
+		  System.out.println(json.toCharArray().length);
+		  System.out.println();
+			//LOOP?:
+				//While there is a line in JSON up to a certain line (test:4)
+		  int a = 0, j=0;
+		for (int i=1; i<cson.length; i++)
+		{
+			if (cson[i] == '{' && a==0)
+			{
+				j=i;
+			}
+			
+			if (cson[i] == '}')
+			{
+				a++;
+				String sson = "";
+				for(int k=j; k<=i; k++)
+					sson+= cson[k];
+				postList.add(gson.fromJson(sson,Post.class));	//INDEED
+				j=i+1;
+				 
+				 //2/1/13 - This works fine. GSON_Tester parses all of the json into individual Posts.
+				 //			Next Step: add Posts to Post ArrayList :)
+			}
+		}
+		System.out.println(postList.get(0).getText());	//this is null
+		getTeachers();
+		} catch (IOException e)
+		{
+			System.out.println("Exception Caught");
+			e.printStackTrace();
+		}
+	}
+    
+    /**
+     * 
+     */
+	private static void getTeachers()
 	{
 		Gson gson = new Gson();
 		String json;
@@ -74,21 +108,19 @@ public class GSON_UID_Tester
 				a++;
 			}
 		}
-		
-		//------------TEST AREA-------------\\
-	/**	for(int i=0; i<teacherList.size(); i++)
-		{
-			System.out.println("UID: "+teacherList.get(i).getUID());
-			System.out.println("Name: "+teacherList.get(i).getName());
-			System.out.println("Rank: "+teacherList.get(i).getRank());
-			System.out.println();
-		}*/
-		
-		
 		} catch (IOException e) {e.printStackTrace();}
-		
+		for(int i=0; i<postList.size(); i++)
+			for(int j=0; j<teacherList.size(); j++)
+				if ( postList.get(i).getUID() == teacherList.get(j).getUID() )
+				{
+					postList.get(i).setTeacher(teacherList.get(j));
+					break;
+				}
 	}
-	public static String getJSON(String url) throws IOException {  
+    /**
+     * 
+     */
+    private static String getJSON(String url) throws IOException {  
 		BufferedReader bis = null;  
 		InputStream is = null;  
 		 
